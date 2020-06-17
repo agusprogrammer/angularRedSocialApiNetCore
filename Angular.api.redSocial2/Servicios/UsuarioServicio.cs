@@ -147,7 +147,6 @@ namespace Angular.api.redSocial2.Servicios
             string resultado = "";
             
 
-
             string query = "";
             if (usu.idUsu <= 0 | usu.idUsu == null)
             {
