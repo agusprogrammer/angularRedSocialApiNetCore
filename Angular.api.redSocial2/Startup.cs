@@ -24,6 +24,18 @@ namespace Angular.api.redSocial2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            //Configuracion swagger
+            services.AddSwaggerGen(config => {
+
+                config.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info()
+                {
+                    Title = "Api red social"
+                });
+
+            });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +45,21 @@ namespace Angular.api.redSocial2
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            //Configuracion swagger
+            app.UseSwagger();
+            app.UseSwaggerUI(config => {
+                config.SwaggerEndpoint("/swagger/v1/swagger.json", "Angular API");
+            });
+
+            //Configuracion cors (Si se permite todo, no usar en produccion)
+            app.UseCors(option => {
+
+                option.AllowAnyHeader();    //Se permite todo, cambiar mas adelante 
+                option.AllowAnyMethod();
+                option.AllowAnyOrigin();
+
+            });
 
             app.UseMvc();
         }
